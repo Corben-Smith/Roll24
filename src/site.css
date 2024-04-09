@@ -743,12 +743,13 @@ video {
   clear: none;
 }
 
-.mt-2 {
-  margin-top: 0.5rem;
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
-.mr-0 {
-  margin-right: 0px;
+.mt-2 {
+  margin-top: 0.5rem;
 }
 
 .box-border {
@@ -862,6 +863,11 @@ video {
   height: 100%;
 }
 
+.h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 .w-\[100vw\] {
   width: 100vw;
 }
@@ -870,8 +876,8 @@ video {
   width: 10rem;
 }
 
-.w-\[50vw\] {
-  width: 50vw;
+.w-\[80vw\] {
+  width: 80vw;
 }
 
 .w-\[this-is\\\\\] {
@@ -890,12 +896,17 @@ video {
   width: 100%;
 }
 
-.w-\[vw\] {
-  width: vw;
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
-.w-\[80vw\] {
-  width: 80vw;
+.w-8 {
+  width: 2rem;
+}
+
+.w-10 {
+  width: 2.5rem;
 }
 
 .flex-shrink {
@@ -1236,8 +1247,8 @@ video {
   grid-auto-flow: column dense;
 }
 
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.grid-cols-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .flex-row {
@@ -1422,6 +1433,10 @@ video {
 
 .justify-items-stretch {
   justify-items: stretch;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
@@ -1881,6 +1896,16 @@ video {
 .bg-red-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 226 226 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#F1F0DE\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 240 222 / var(--tw-bg-opacity));
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .decoration-slice {

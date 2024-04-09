@@ -5,6 +5,8 @@ import {Droppable} from './Droppable';
 import {Draggable} from './Draggable';
 import './site.css'
 
+import Token from '../Token';
+
 
 export default function Board(props) {
   let containers = [];
@@ -14,9 +16,9 @@ export default function Board(props) {
 
 
   const [tokens, updateTokens] = useState([
-    { id: 1, title: "Guy1", className: "bg-red-100 h-full w-full text-center text-black" },
-    { id: 2, title: "Guy2", className: "bg-red-100 h-full w-full text-center text-black" },
-    { id: 3, title: "Guy3", className: "bg-red-100 h-full w-full text-center text-black" }
+    { id: 1, token: new Token("Guy 1"), className: "bg-red-100 h-full w-full text-center text-black object-contain" },
+    { id: 2, token: new Token("Guy 2"), className: "bg-red-100 h-full w-full text-center text-black" },
+    { id: 3, token: new Token("Guy 3"), className: "bg-red-100 h-full w-full text-center text-black" }
 
   ])
 
@@ -29,7 +31,7 @@ export default function Board(props) {
           {containers.map((id) => (
             <Droppable className="border-4 border-solid border-blue-600 w-[10rem] h-[10rem]" key={id} id={id}>
               {tokens.map(token =>
-                token.id === id ? <Draggable className={token.className} title={token.title} id={token.id}></Draggable> : null  
+                token.id === id ? <Draggable className={token.className} id={token.id} token={token.token}></Draggable> : null  
               )}
           </Droppable>
           ))}
