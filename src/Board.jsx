@@ -10,26 +10,25 @@ import Token from '../Token';
 
 export default function Board(props) {
   let containers = [];
-  for (let index = 1; index <= props.sizeX * props.sizeY; index++) {
+  for (let index = 1; index <= 80 * 10; index++) {
     containers.push(index);
   }
 
 
   const [tokens, updateTokens] = useState([
-    { id: 1, token: new Token("Guy 1"), className: "bg-red-100 h-full w-full text-center text-black object-contain" },
-    { id: 2, token: new Token("Guy 2"), className: "bg-red-100 h-full w-full text-center text-black" },
-    { id: 3, token: new Token("Guy 3"), className: "bg-red-100 h-full w-full text-center text-black" }
+    { id: 1, token: new Token("Guy 1"), className: "h-full w-full text-center text-black"},
+    { id: 2, token: new Token("Guy 2"), className: "h-full w-full text-center text-black"},
+    { id: 3, token: new Token("Guy 3"), className: "h-full w-full text-center text-black"}
 
   ])
 
   const held = useRef(null)
 
   return (
-    <div className={props.className}>
-      <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-        <div className="flex-shrink-0 flex flex-wrap h-full w-[100vw] text-black" >
+      <DndContext className="flex w-full h-full overflow-y-scroll overflow-x-scroll touch-pinch-zoom object-contain" onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+        <div className="flex-shrink-0 flex flex-wrap h-full w-full text-black" >
           {containers.map((id) => (
-            <Droppable className="border-4 border-solid border-blue-600 w-[10rem] h-[10rem]" key={id} id={id}>
+            <Droppable className="border-4 border-solid border-black-rgba w-[180px] h-[180px]" key={id} id={id}>
               {tokens.map(token =>
                 token.id === id ? <Draggable className={token.className} id={token.id} token={token.token}></Draggable> : null  
               )}
@@ -37,7 +36,6 @@ export default function Board(props) {
           ))}
         </div>
       </DndContext>
-    </div>
   );
 
   function handleDragEnd(event) {
