@@ -899,6 +899,10 @@ video {
   width: 100%;
 }
 
+.w-\[250px\] {
+  width: 250px;
+}
+
 .flex-shrink {
   flex-shrink: 1;
 }
@@ -1902,6 +1906,10 @@ video {
           box-decoration-break: clone;
 }
 
+.bg-cover {
+  background-size: cover;
+}
+
 .bg-fixed {
   background-attachment: fixed;
 }
@@ -1929,6 +1937,10 @@ video {
 .bg-clip-text {
   -webkit-background-clip: text;
           background-clip: text;
+}
+
+.bg-center {
+  background-position: center;
 }
 
 .bg-repeat {
