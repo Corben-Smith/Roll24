@@ -44,7 +44,9 @@ export default function Board(props) {
       reader.readAsDataURL(event.target.files[0])
       const img = new Image();
       img.onload = () => {
-        setDimensions({ width: img.width + 'px', height: img.height + 'px' });
+        setDimensions(
+          
+        );
         setSelectedImage(url);
       };
       img.src = url;
