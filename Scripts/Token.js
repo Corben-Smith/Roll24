@@ -1,5 +1,8 @@
 export default class Token {
-    constructor(title) {
+    conditions = new [];
+    constructor(title, ac, health) {
         this.title = title
+        this.ac = ac
+        this.health = health
     }
 }

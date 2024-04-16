@@ -25,6 +25,10 @@ export default function UI(props) {
     setRolled(Math.floor(Math.random() * number))
   }
 
+  function Sort(){
+    setSor
+  }
+
   return(
       <div>      
         <form onSubmit={handleSubmit}>        
@@ -50,6 +54,10 @@ export default function UI(props) {
           </div>
           <h1>{rolledNumber + 1}</h1>
         </div>
+        <div className="bg-white flex flex-col text-center items-center justify-center my-8">
+          <h1>Initiative Counter</h1>
+
+        </div>
       </div>
   )
-};
+}
