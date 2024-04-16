@@ -21,6 +21,6 @@ export default class Map {
 
     static ParseJson(json) {
         const jsonObj = JSON.parse(json)
-        return new Map(json.image, Token.ParseJson(json.tokens), json.cellDimensions);
+        return new Map(jsonObj.image, Token.ParseJson(jsonObj.tokens), jsonObj.cellDimensions);
     }
 }
