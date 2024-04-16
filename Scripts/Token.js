@@ -10,4 +10,12 @@ export default class Token {
         this.status = status
         this.image = image
     }
+
+    static ParseJson(json) {
+        const jsonObj = JSON.parse(json)
+        if(!Array.isArray(jsonObj)){
+            return new Token(jsonObj.name, jsonObj.image, Status.ParseJson(jsonObj.status));
+        }
+        return jsonObj.map(jsonElement => Token.ParseJson(jsonElement))
+    }
 }

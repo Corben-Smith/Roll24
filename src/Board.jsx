@@ -9,11 +9,8 @@ import Token from '../Scripts/Token';
 
 
 export default function Board(props) {
-  const [selectedImage, setSelectedImage] = useState(localStorage.getItem("savedImage"));
-  const [dimensions, setDimensions] = useState({ width: selectedImage.width, height: selectedImage.height });
-  const [boardMap, setboardMap] = useState(props.map)
-  const held = useRef(null)
-
+  //setting up information about the map
+  const [boardMap, setboardMap] = useState(localStorage.getItem("mapData"))
 
   const [tokens, updateTokens] = useState([
     { id: 1, token: new Token("Guy 1"), className: "h-full w-full text-center text-black"},
@@ -21,8 +18,15 @@ export default function Board(props) {
     { id: 3, token: new Token("Guy 3"), className: "h-full w-full text-center text-black"}
 
   ])
+
+  const [selectedImage, setSelectedImage] = useState(localStorage.getItem("savedImage"));
+  const [dimensions, setDimensions] = useState({ width: selectedImage.width, height: selectedImage.height });
+  const held = useRef(null)
+
   
   useEffect(() => {
+
+
     const img = new Image();
     img.onload = () => {
       setDimensions({ width: img.width + 'px', height: img.height + 'px' });

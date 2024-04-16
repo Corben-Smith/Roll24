@@ -18,4 +18,9 @@ export default class Map {
         }
         img.src = image;
     }
+
+    static ParseJson(json) {
+        const jsonObj = JSON.parse(json)
+        return new Map(json.image, Token.ParseJson(json.tokens), json.cellDimensions);
+    }
 }
