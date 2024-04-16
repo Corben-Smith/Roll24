@@ -1,7 +1,7 @@
 import React from 'react';
 import {useDroppable} from '@dnd-kit/core';
 import './site.css'
-import Token from '../Token';
+import Token from '../Scripts/Token';
 
 
 export function Droppable(props) {
