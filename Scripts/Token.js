@@ -1,7 +1,8 @@
 import Status from './Status'
 export default class Token {
     constructor(id, name, image, status, armourClass, healthPoints, initiative) {
-        if (typeof image !== 'string' || typeof name !== 'string' || !(status instanceof Status) || typeof armorClass !== 'number' || typeof healthPoints !== 'number' || typeof initiative !== 'number') {
+        if (typeof image !== 'string' || typeof name !== 'string' || !(status instanceof Status) || typeof armourClass !== 'number' || typeof healthPoints !== 'number' || typeof initiative !== 'number') {
+            console.log(id, name, image, status, armourClass, healthPoints, initiative)
             throw new Error('Invalid argument types');
         }
         
@@ -17,7 +18,7 @@ export default class Token {
     static ParseJson(json) {
         const jsonObj = JSON.parse(json)
         if(!Array.isArray(jsonObj)){
-            return new Token(jsonObj.id, jsonObj.name, jsonObj.image, Status.ParseJson(jsonObj.status, jsonObj.armorClass, jsonObj.healthPoints, jsonObj.initiative));
+            return new Token(jsonObj.id, jsonObj.name, jsonObj.image, Status.ParseJson(jsonObj.status), jsonObj.armorClass, jsonObj.healthPoints, jsonObj.initiative);
         }
         return jsonObj.map(jsonElement => Token.ParseJson(jsonElement))
     }

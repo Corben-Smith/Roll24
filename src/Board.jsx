@@ -48,7 +48,7 @@ export default function Board(props) {
 
     if (selectedImage && selectedImageT) {
       console.log("sinse")
-      const map = new Map(selectedImage, [new Token(1, "Corben", selectedImageT, new Status("None", "None"))], [170, 170]);
+      const map = new Map(selectedImage, [new Token(1, "Corben", selectedImageT, new Status("None", "None"), 10, 10, 10)], [170, 170]);
       setBoardMap(map);
       updateTokens(map.tokens);
       setCellDimensions({ width: map.cellDimensions[0] + 'px', height: map.cellDimensions[1] + 'px' });
