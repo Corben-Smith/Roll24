@@ -1,6 +1,6 @@
 import Status from './Status'
 export default class Token {
-    constructor(name, image, status, armourClass, healthPoints, initiative) {
+    constructor(id, name, image, status, armourClass, healthPoints, initiative) {
         if (typeof image !== 'string' || typeof name !== 'string' || !(status instanceof Status) || typeof armorClass !== 'number' || typeof healthPoints !== 'number' || typeof initiative !== 'number') {
             throw new Error('Invalid argument types');
         }
