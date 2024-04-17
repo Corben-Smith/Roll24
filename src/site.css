@@ -851,20 +851,16 @@ video {
   display: none;
 }
 
-.h-\[180px\] {
-  height: 180px;
-}
-
 .h-full {
   height: 100%;
 }
 
-.w-10 {
-  width: 2.5rem;
+.h-\[180px\] {
+  height: 180px;
 }
 
-.w-\[180px\] {
-  width: 180px;
+.w-10 {
+  width: 2.5rem;
 }
 
 .w-\[this-is\\\\\] {
@@ -881,6 +877,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[180px\] {
+  width: 180px;
 }
 
 .flex-shrink {
