@@ -1,7 +1,7 @@
 import Status from './Status'
 export default class Token {
     constructor(name, image, status, armourClass, healthPoints, initiative) {
-        if (typeof image !== 'string' || typeof name !== 'string' || !(status instanceof Status) || typeof armorClass !== 'number' || typeof healthPoints !== 'number' || typeof initiative !== 'number') {
+        if (typeof image !== 'string' || typeof name !== 'string' || !(status instanceof Status) || typeof armourClass !== 'number' || typeof healthPoints !== 'number' || typeof initiative !== 'number') {
             throw new Error('Invalid argument types');
         }
         
@@ -9,7 +9,7 @@ export default class Token {
         this.name = name
         this.status = status
         this.image = image
-        this.armorClass = armourClass
+        this.armourClass = armourClass
         this.healthPoints = healthPoints
         this.initiative = initiative
     }
