@@ -851,20 +851,12 @@ video {
   display: none;
 }
 
-.h-\[180px\] {
-  height: 180px;
-}
-
 .h-full {
   height: 100%;
 }
 
 .w-10 {
   width: 2.5rem;
-}
-
-.w-\[180px\] {
-  width: 180px;
 }
 
 .w-\[this-is\\\\\] {
