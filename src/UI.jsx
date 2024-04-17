@@ -1,6 +1,7 @@
 import React, {useRef, useState} from 'react';
 
 import './site.css'
+import Token from '../Scripts/Token';
 
 
 
@@ -25,10 +26,16 @@ export default function UI(props) {
     setRolled(Math.floor(Math.random() * number))
   }
 
-  function Sort(){
-    setSor
+  function TokenCreator(name, image, status, armourClass, healthPoints, initiative){
+    Token
+    try {
+      Token(name, image, status, armourClass,healthPoints,initiative);
+    }
+    catch(e){}
+    
   }
 
+  
   return(
       <div>      
         <form onSubmit={handleSubmit}>        
@@ -56,7 +63,17 @@ export default function UI(props) {
         </div>
         <div className="bg-white flex flex-col text-center items-center justify-center my-8">
           <h1>Initiative Counter</h1>
-
+          <label>PlayerName:</label>
+          <input type = "text" id = "playerName" name = "playerName"></input>
+          <label>TokenImage:</label>
+          <input type = "image" id = "tokenImage" name = "tokenImage"></input>
+          <label>Conditions:</label>
+          <input type = "text" id = "condition" name = "condition"></input>
+          <label>Armour Class:</label>
+          <input type = "number" id = "tokenAC" name = "tokenAC"></input>
+          <label>Health Points:</label>
+          <input type = "number" id = "tokenHP" name = "tokenHP"></input>
+          <button onClick ={() => SubmitEvent()}></button>
         </div>
       </div>
   )
