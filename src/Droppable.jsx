@@ -10,6 +10,8 @@ export function Droppable(props) {
   });
   const style = {
     color: isOver ? 'green' : undefined,
+    width: props.w,
+    height: props.h
   }
 
 

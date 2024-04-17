@@ -5,85 +5,119 @@ import {Droppable} from './Droppable';
 import {Draggable} from './Draggable';
 import './site.css'
 
+import Map from '../Scripts/Map'
 import Token from '../Scripts/Token';
+import Status from '../Scripts/Status';
 
 
 export default function Board(props) {
   //setting up information about the map
-  const [boardMap, setboardMap] = useState(localStorage.getItem("mapData"))
-
-  const [tokens, updateTokens] = useState([
-    { id: 1, token: new Token("Guy 1"), className: "h-full w-full text-center text-black"},
-    { id: 2, token: new Token("Guy 2"), className: "h-full w-full text-center text-black"},
-    { id: 3, token: new Token("Guy 3"), className: "h-full w-full text-center text-black"}
-
-  ])
-
-  const [selectedImage, setSelectedImage] = useState(localStorage.getItem("savedImage"));
-  const [dimensions, setDimensions] = useState({ width: selectedImage.width, height: selectedImage.height });
+  /*
+  const [selectedImage, setSelectedImage] = useState(localStorage.getItem("savedImage"))
+  const [boardMap, setboardMap] = useState(new Map(selectedImage, [new Token(0,"Corben", selectedImage, new Status("None", "None"))], [500, 500]))
+  const [tokens, updateTokens] = useState(boardMap.tokens)
+  const [dimensions, setDimensions] = useState({ width: 'auto', height: 'auto' });
+  const [cellDimensions, setCellDimensions] = useState({width: boardMap.cellDimensions[0] + 'px', height: boardMap.cellDimensions[1] + 'px' })
   const held = useRef(null)
 
+  let idek = false
+  useEffect(() => {
+    console.log("mmm")
+
+    if(!idek){
+      const img = new Image();
+      img.onload = () => {
+        setDimensions({ width: img.width + 'px', height: img.height + 'px' });
+      };
+      img.src = selectedImage;
+      idek = !idek
+    }
+  })
+  */
+
+  const [selectedImage, setSelectedImage] = useState(localStorage.getItem("savedImage"));
+  const [selectedImageT, setSelectedImageT] = useState(localStorage.getItem("savedImageT"));
+  const [boardMap, setBoardMap] = useState(null);
+  const [tokens, updateTokens] = useState([]);
+  const [dimensions, setDimensions] = useState({ width: 'auto', height: 'auto' });
+  const [cellDimensions, setCellDimensions] = useState({ width: '100px', height: '100px' });
+  const held = useRef(null);
+
+  useEffect(() => {
+    console.log("sinsssse")
+
+    if (selectedImage && selectedImageT) {
+      console.log("sinse")
+      const map = new Map(selectedImage, [new Token(1, "Corben", selectedImageT, new Status("None", "None"), 10, 10, 10)], [170, 170]);
+      setBoardMap(map);
+      updateTokens(map.tokens);
+      setCellDimensions({ width: map.cellDimensions[0] + 'px', height: map.cellDimensions[1] + 'px' });
+
+      const img = new Image();
+      img.onload = () => {
+        setDimensions({ width: img.width + 'px', height: img.height + 'px' });
+      };
+      img.src = selectedImage;
+
+    }
+  }, [selectedImage] && [selectedImageT]);
   
   useEffect(() => {
+          
+    console.log(dimensions)
+    console.log(cellDimensions)
 
-
-    const img = new Image();
-    img.onload = () => {
-      setDimensions({ width: img.width + 'px', height: img.height + 'px' });
-      reader.readAsDataURL(url)
-    };
-    img.src = selectedImage;
+    console.log(tokens)
   })
 
   const reader = new FileReader();
-
   reader.onloadend = function() {
     console.log("url")
-    localStorage.setItem('savedImage', reader.result);
-    
+    localStorage.setItem('savedImageT', reader.result);
   };
 
+  
   function handleImageUpload(event){
       const url = URL.createObjectURL(event.target.files[0]);
       reader.readAsDataURL(event.target.files[0])
       const img = new Image();
       img.onload = () => {
-        setDimensions(
-          
-        );
-        setSelectedImage(url);
+        setSelectedImageT(url);
       };
       img.src = url;
   }
-/*
-  function handleImageUpload(event){
-    const url = URL.createObjectURL(event.target.files[0])
-    reader.readAsDataURL(event.target.files[0]);
-    setSelectedImage(url);
-    setDimensions({ width: event.target.files[0].width + 'px', height: event.target.files[0].height + 'px' });
-  }
-*/
+
   let containers = [];
-  for (let index = 1; index <= 80 * 10; index++) {
+  const parentWidth = parseInt(dimensions.width, 10); // Convert width to number
+  const parentHeight = parseInt(dimensions.height, 10); // Convert height to number
+  const cellWidth = parseInt(cellDimensions.width, 10); // Convert cell width to number
+  const cellHeight = parseInt(cellDimensions.height, 10); // Convert cell height to number
+  
+  for (let index = 1; index <= (parentWidth / cellWidth) * (parentHeight / cellHeight) - 1; index++) {
     containers.push(index);
-  }
+  } 
+
   return (
-    <div className='bg-cover bg-center' style={{ backgroundImage: `url(${selectedImage})`, width: dimensions.width, height: dimensions.height}}>
+    <div>
       <input type="file" name="myImage" onChange={handleImageUpload}/>
-      <DndContext className="w-full h-full flex overflow-y-scroll overflow-x-scroll touch-pinch-zoom object-contain" onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-        <div className="flex-shrink-0 flex flex-wrap h-full w-full text-black" >
-          {containers.map((id) => (
-            <Droppable className="border-4 border-solid border-black-rgba w-[180px] h-[180px]" key={id} id={id}>
-              {tokens.map(token =>
-                token.id === id ? <Draggable className={token.className} id={token.id} token={token.token}></Draggable> : null  
-              )}
-          </Droppable>
-          ))}
-        </div>
+        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+          <div className="flex flex-wrap text-black" style={{ backgroundImage: `url(${selectedImage})`, width: dimensions.width, height: dimensions.height}} >
+            {containers.map((id) => (
+              <Droppable className="flex-shrink-0 border-1 border-solid border-black-rgba" w={cellDimensions.width} h={cellDimensions.height} key={id} id={id}>
+                {tokens.map(token =>
+                  token.id === id ? <Draggable className="h-full w-full text-center text-black bg-cover bg-center" id={token.id} token={token} ></Draggable> : null  
+                )}
+            </Droppable>
+            ))}
+          </div>
       </DndContext>
     </div>
   );
 
+
+
+  //everything for handling drag and drop
+  
   function handleDragEnd(event) {
     console.log("here")
     
