@@ -27,12 +27,13 @@ export default function UI(props) {
   }
 
   function TokenCreator(name, image, status, armourClass, healthPoints, initiative){
-    Token
+    
     try {
       Token(name, image, status, armourClass,healthPoints,initiative);
     }
-    catch(e){}
-    
+    catch(e)
+    {
+    }
   }
 
   
@@ -66,7 +67,7 @@ export default function UI(props) {
           <label>PlayerName:</label>
           <input type = "text" id = "playerName" name = "playerName"></input>
           <label>TokenImage:</label>
-          <input type = "image" id = "tokenImage" name = "tokenImage"></input>
+          <input type = "file" id = "tokenImage" name = "tokenImage"></input>
           <label>Conditions:</label>
           <input type = "text" id = "condition" name = "condition"></input>
           <label>Armour Class:</label>
