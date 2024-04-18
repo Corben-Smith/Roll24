@@ -855,10 +855,6 @@ video {
   height: 100%;
 }
 
-.h-\[180px\] {
-  height: 180px;
-}
-
 .w-10 {
   width: 2.5rem;
 }
@@ -877,10 +873,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-\[180px\] {
-  width: 180px;
 }
 
 .flex-shrink {

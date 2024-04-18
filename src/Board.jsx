@@ -1,11 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import {DndContext} from '@dnd-kit/core';
 
 import {Droppable} from './Droppable';
 import {Draggable} from './Draggable';
 import './site.css'
 
-import Map from '../Scripts/Map'
+import Map from '../Scripts/Map'  
 import Token from '../Scripts/Token';
 import Status from '../Scripts/Status';
 
@@ -48,7 +49,7 @@ export default function Board(props) {
 
     if (selectedImage && selectedImageT) {
       console.log("sinse")
-      const map = new Map(selectedImage, [new Token(1, "Corben", selectedImageT, new Status("None", "None"), 10, 10, 10)], [170, 170]);
+      const map = new Map(selectedImage, [new Token(1, "Corben", selectedImageT, new Status("None", "None"), 10, 10, 10), new Token(2, "Corben", selectedImageT, new Status("None", "None"), 10, 10, 10)], [170.6666667, 170.6666667]);
       setBoardMap(map);
       updateTokens(map.tokens);
       setCellDimensions({ width: map.cellDimensions[0] + 'px', height: map.cellDimensions[1] + 'px' });
@@ -102,21 +103,22 @@ export default function Board(props) {
       <input type="file" name="myImage" onChange={handleImageUpload}/>
         <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
           <div className="flex flex-wrap text-black" style={{ backgroundImage: `url(${selectedImage})`, width: dimensions.width, height: dimensions.height}} >
-            {containers.map((id) => (
-              <Droppable className="flex-shrink-0 border-1 border-solid border-black-rgba" w={cellDimensions.width} h={cellDimensions.height} key={id} id={id}>
-                {tokens.map(token =>
-                  token.id === id ? <Draggable className="h-full w-full text-center text-black bg-cover bg-center" id={token.id} token={token} ></Draggable> : null  
-                )}
+          {containers.map((id) => (
+            <Droppable className="flex-shrink-0 border-1 border-solid border-black-rgba" w={cellDimensions.width} h={cellDimensions.height} key={id} id={id}>
+              {tokens.map(token =>
+                token.id === id ? <Draggable className="h-full w-full text-center text-black bg-cover bg-center" id={token.id} token={token} ></Draggable> : null  
+              )}
             </Droppable>
             ))}
           </div>
-      </DndContext>
+        </DndContext>
     </div>
   );
 
 
 
-  //everything for handling drag and drop
+  //everything for handling drag and drop      
+
   
   function handleDragEnd(event) {
     console.log("here")
