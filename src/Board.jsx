@@ -49,7 +49,7 @@ export default function Board(props) {
 
     if (selectedImage && selectedImageT) {
       console.log("sinse")
-      const map = new Map(selectedImage, [new Token(1, "Corben", selectedImageT, new Status("None", "None"), 10, 10, 10), new Token(2, "Corben", selectedImageT, new Status("None", "None"), 10, 10, 10)], [170.6666667, 170.6666667]);
+      const map = new Map(selectedImage, [new Token(1, "Corben", selectedImageT, new Status("Bloodied", "#FF0000"), 10, 10, 10), new Token(2, "Corben", selectedImageT, new Status("None", "None"), 10, 10, 10)], [170.6666667, 170.6666667]);
       setBoardMap(map);
       updateTokens(map.tokens);
       setCellDimensions({ width: map.cellDimensions[0] + 'px', height: map.cellDimensions[1] + 'px' });
@@ -89,12 +89,12 @@ export default function Board(props) {
   }
 
   let containers = [];
-  const parentWidth = parseInt(dimensions.width, 10); // Convert width to number
-  const parentHeight = parseInt(dimensions.height, 10); // Convert height to number
-  const cellWidth = parseInt(cellDimensions.width, 10); // Convert cell width to number
-  const cellHeight = parseInt(cellDimensions.height, 10); // Convert cell height to number
+  const parentWidth = parseInt(dimensions.width, 10); 
+  const parentHeight = parseInt(dimensions.height, 10); 
+  const cellWidth = parseInt(cellDimensions.width, 10);
+  const cellHeight = parseInt(cellDimensions.height, 10); 
   
-  for (let index = 1; index <= (parentWidth / cellWidth) * (parentHeight / cellHeight) - 1; index++) {
+  for (let index = 1; index <= (parentWidth / cellWidth) * (parentHeight / cellHeight) -1 ; index++) {
     containers.push(index);
   } 
 
@@ -107,7 +107,7 @@ export default function Board(props) {
             <Droppable className="flex-shrink-0 border-1 border-solid border-black-rgba" w={cellDimensions.width} h={cellDimensions.height} key={id} id={id}>
               {tokens.map(token =>
                 token.id === id ? <Draggable className="h-full w-full text-center text-black bg-cover bg-center" id={token.id} token={token} ></Draggable> : null  
-              )}
+              )} 
             </Droppable>
             ))}
           </div>

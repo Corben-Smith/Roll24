@@ -65,7 +65,7 @@ export default function UI(props) {
         <div className="bg-white flex flex-col text-left items-left justify-right my-8">
           <h1>Token Creator</h1>
           <label>PlayerName:</label>
-          <input type = "text" id = "playerName" name = "playerName" onChange={playerName =}></input>
+          <input type = "text" id = "playerName" name = "playerName" onChange={playerName}></input>
           <label>TokenImage:</label>
           <input type = "file" id = "tokenImage" name = "tokenImage"></input>
           <label>Conditions:</label>
