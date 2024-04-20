@@ -1,9 +1,7 @@
 import React, {useRef, useState} from 'react';
 
 import './site.css'
-import Token from '../Scripts/Token';
-import Sidebar from './Sidebar';
-import TokenCreator from './TokenCreator';
+
 
 
 
@@ -24,26 +22,22 @@ export default function UI(props) {
     setSizeY(event.target.value)
   }
 
-  function Roll(number){
-    setRolled(Math.floor(Math.random() * number))
-  }
-
-  function TokenCreatorFunction(name, image, status, armourClass, healthPoints, initiative){
-    
-    try {
-      Token(name, image, status, armourClass,healthPoints,initiative);
-    }
-    catch(e)
-    {""}
-  }
 
   
   return(
-      <div>
-
-        <Sidebar/>
+      <div>      
         
-        <TokenCreator/>
+        <form onSubmit={handleSubmit}>        
+          <label>
+            SizeX:
+            <input type="number" value={sizeX} onChange={handleChangeX}/>        
+          </label>
+          <label>
+            SizeY:
+            <input type="text" value={sizeY} onChange={handleChangeY}/>        
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
       </div>
   )
 }

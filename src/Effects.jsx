@@ -3,11 +3,10 @@ import React, {useRef, useState} from 'react';
 import './site.css'
 import Token from '../Scripts/Token';
 import Sidebar from './Sidebar';
-import TokenCreator from './TokenCreator';
 
 
 
-export default function UI(props) {
+export default function Effects(props) {
   const [sizeX, setSizeX] = useState(10);
   const [sizeY, setSizeY] = useState(10);
   const [rolledNumber, setRolled] = useState(null);
@@ -28,7 +27,7 @@ export default function UI(props) {
     setRolled(Math.floor(Math.random() * number))
   }
 
-  function TokenCreatorFunction(name, image, status, armourClass, healthPoints, initiative){
+  function TokenCreator(name, image, status, armourClass, healthPoints, initiative){
     
     try {
       Token(name, image, status, armourClass,healthPoints,initiative);
@@ -40,10 +39,7 @@ export default function UI(props) {
   
   return(
       <div>
-
-        <Sidebar/>
-        
-        <TokenCreator/>
+        <Sidebar></Sidebar>
       </div>
   )
 }
