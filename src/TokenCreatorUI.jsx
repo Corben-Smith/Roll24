@@ -6,7 +6,7 @@ import Token from '../Scripts/Token';
 
 
 
-export default function UI(props) {
+export default function TokenCreatorUI(props) {
   const [name, setName] = useState("")
   const [image, setSelectedImage] = useState(localStorage.getItem("savedImage"))
   const [status, setStatus] = useState()

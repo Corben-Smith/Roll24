@@ -3,7 +3,7 @@ import React, {useRef, useState} from 'react';
 import './site.css'
 import Token from '../Scripts/Token';
 import Sidebar from './Sidebar';
-import TokenCreator from './TokenCreator';
+import TokenCreatorUI from './TokenCreatorUI';
 
 
 
@@ -41,7 +41,7 @@ export default function UI(props) {
   return(
       <div className='h-[100vh] overflow-hidden'>
         <Sidebar/>
-        <TokenCreator/>
+        <TokenCreatorUI/>
       </div>
   )
 }
