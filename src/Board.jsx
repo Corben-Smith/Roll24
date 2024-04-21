@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useState} from 'react';
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import {DndContext} from '@dnd-kit/core';
 
 import {Droppable} from './Droppable';
