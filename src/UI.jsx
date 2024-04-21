@@ -39,10 +39,8 @@ export default function UI(props) {
 
   
   return(
-      <div>
-
+      <div className='h-[100vh] overflow-hidden'>
         <Sidebar/>
-        
         <TokenCreator/>
       </div>
   )

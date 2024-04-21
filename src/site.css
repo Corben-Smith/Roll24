@@ -910,6 +910,10 @@ video {
   height: 100%;
 }
 
+.h-\[100vh\] {
+  height: 100vh;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
