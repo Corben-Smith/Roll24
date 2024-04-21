@@ -1,8 +1,6 @@
 import React from 'react';
 import {useDraggable} from '@dnd-kit/core';
 import './site.css'
-import Token from '../Scripts/Token';
-import logo from './assets/tokenImages/token_1.png';
 
 export function Draggable(props) {
   const {attributes, listeners, setNodeRef, transform} = useDraggable({
