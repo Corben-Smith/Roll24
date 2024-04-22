@@ -1,5 +1,6 @@
 import React, {useRef, useState} from 'react';
 import './site.css'
+import { PhotoInput } from './PhotoInput';
 
 
 
@@ -7,8 +8,6 @@ import './site.css'
 export default function App(props) {
 
   return(
-    <div>
-      <h1>Some Kind Of Landing Page</h1>
-    </div>
+    <PhotoInput file/>
   )
 };

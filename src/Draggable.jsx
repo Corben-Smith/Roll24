@@ -21,7 +21,7 @@ export function Draggable(props) {
   
   return (
     <button ref={setNodeRef} style={style} className={props.className} {...listeners} {...attributes}>
-      <img src={props.token.image}/>
+      <img src={`http://localhost:3000/uploads/${props.token.image}`}/>
     </button>
   );
 }

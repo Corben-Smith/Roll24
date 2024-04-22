@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import './site.css'
 import Board from './Board.jsx';
 import UI from './UI.jsx';
-import App from './UI.jsx';
+import App from './App.jsx';
 import Preview from './Preview.jsx';
 import Roller from './Roller.jsx';
 import Effects from './Effects.jsx';
