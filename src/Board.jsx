@@ -12,12 +12,12 @@ import { KeepScale } from 'react-zoom-pan-pinch';
 
 
 export default function Board(props) {
-  const [boardMap, setBoardMap] = useState(Map.ParseJson(localStorage.getItem('savedMap')));
+  const [boardMap, setBoardMap] = useState(props.map ? props.map : Map.ParseJson(localStorage.getItem('savedMap')));
   const [tokens, updateTokens] = useState([]);
   const [dimensions, setDimensions] = useState({ width: 'auto', height: 'auto' });
   const [cellDimensions, setCellDimensions] = useState({ width: '100px', height: '100px' });
   const held = useRef(null);
-  const [scale, setScale] = useState(1)
+  const [scale, setScale] = useState(props.scale ? props.scale : 1)
 
   const increaseScale = () => setScale(prevScale => prevScale * 1.1); // Increase scale by 10%
   const decreaseScale = () => setScale(prevScale => prevScale / 1.1);
