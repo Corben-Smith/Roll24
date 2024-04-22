@@ -8,6 +8,9 @@ import { PhotoInput } from './PhotoInput';
 export default function App(props) {
 
   return(
-    <PhotoInput file/>
+    <>
+      <p>stealing this for dev stuff</p>
+      <PhotoInput file/>
+    </>
   )
 };

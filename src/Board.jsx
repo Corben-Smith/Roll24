@@ -8,6 +8,7 @@ import Map from '../Scripts/Map'
 import Token from '../Scripts/Token';
 import Status from '../Scripts/Status';
 import { PhotoInput } from './PhotoInput';
+import { KeepScale } from 'react-zoom-pan-pinch';
 
 
 export default function Board(props) {
@@ -16,16 +17,19 @@ export default function Board(props) {
   const [dimensions, setDimensions] = useState({ width: 'auto', height: 'auto' });
   const [cellDimensions, setCellDimensions] = useState({ width: '100px', height: '100px' });
   const held = useRef(null);
+  const [scale, setScale] = useState(1)
 
-  useEffect(() => {
-    // const map = new Map('map.jpg', [new Token(1, "Corben", 'image.png', new Status("Bloodied", "#FF0000"), 10, 10, 10)], [133.78378378378378, 133.78378378378378]);
-    // localStorage.setItem('savedMap', JSON.stringify(map))
+  const increaseScale = () => setScale(prevScale => prevScale * 1.1); // Increase scale by 10%
+  const decreaseScale = () => setScale(prevScale => prevScale / 1.1);
+
+  // useEffect(() => {
+  //   // const map = new Map('map.jpg', [new Token(1, "Corben", 'image.png', new Status("Bloodied", "#FF0000"), 10, 10, 10)], [133.78378378378378, 133.78378378378378]);
+  //   // localStorage.setItem('savedMap', JSON.stringify(map))
     
-    console.log(boardMap)
-  })
+  //   console.log(boardMap)
+  // })
 
   useEffect(() => {
-    console.log("Runnning")
     updateTokens(boardMap.tokens);
     setCellDimensions({ width: boardMap.cellDimensions[0] + 'px', height: boardMap.cellDimensions[1] + 'px' });
 
@@ -72,18 +76,23 @@ export default function Board(props) {
   }
 
   return (
-    <div>
+    <div className='bg-black'>
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-        <div className="flex flex-wrap text-black" style={{ background: `url(http://localhost:3000/uploads/${boardMap.image})`, width: dimensions.width, height: dimensions.height}} >
+        <div className="flex flex-wrap text-black origin-top-left" style={{ transform: `scale(${scale})`, background: `url(http://localhost:3000/uploads/${boardMap.image})`, width: dimensions.width, height: dimensions.height}} >
         {containers.map((id) => (
           <Droppable className="flex-shrink-0 border-1 border-solid border-black-rgba" w={cellDimensions.width} h={cellDimensions.height} key={id} id={id}>
             {tokens.map(token =>
-              token.id === id ? <Draggable className="h-full w-full text-center text-black bg-cover bg-center" id={token.id} token={token} ></Draggable> : null  
+              token.id === id ? <Draggable className="h-full w-full text-center text-black bg-cover bg-center" scale={1/scale} id={token.id} token={token} ></Draggable> : null  
             )} 
           </Droppable>
           ))}
         </div>
       </DndContext>
+
+      <div className='fixed right-4 bottom-4 bg-dark-green text-center align-middle'>
+      <button className=' text-5xl mx-8' onClick={increaseScale}>+</button> {/* Plus button */}
+      <button className=' text-5xl mx-8' onClick={decreaseScale}>-</button> {/* Minus button */}
+      </div>
     </div>
   );
 };
