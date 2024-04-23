@@ -3,7 +3,7 @@ export default {
   content: ["./**/*.{html,js,jsx}"],  
   theme: {
     colors:{
-      'black-rgba': 'rgba(0, 0, 0, 0.54)',
+      'black-rgba': 'rgba(0, 0, 0, 0.10)',
       'dark-green': '#3b7160',
       'light-green': '#9af2c6',
       'white': '#ffffff',

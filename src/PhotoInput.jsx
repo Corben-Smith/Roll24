@@ -2,25 +2,36 @@ import React from 'react';
 import './site.css'
 
 export function PhotoInput(props) {
-  const reader = new FileReader();
-  reader.onloadend = function() {
-    console.log(`${props.fileName} is being saved in cache`)
-    localStorage.setItem(props.fileName, reader.result);
-  };
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
 
-  function handleImageUpload(event){
-    reader.readAsDataURL(event.target.files[0])
+    reader.onloadend = async () => {
+      const imageData = reader.result;
+      const img = new Image()
+      img.onload = () =>{
+      }
 
-    if(props.state !== null){     
-    const baseString = URL.createObjectURL(event.target.files[0]);
-    const img = new Image();
-
-    img.onload = () => {
-      props.state(baseString)
+      const response = await fetch('http://localhost:3000/upload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ imageData, imageName: file.name }),
+      });
+  
+      if (response.ok) {
+        console.log('Image uploaded successfully');
+        img.src = imageData
+      } else {
+        console.error('Failed to upload image');
+      }
     };
-    img.src = baseString
+  
+    if (file) {
+      reader.readAsDataURL(file);
     }
-  }
+  };
 
   return (
     <input type="file" onChange={handleImageUpload}/>

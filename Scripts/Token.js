@@ -18,8 +18,8 @@ export default class Token {
     static ParseJson(json) {
         const jsonObj = JSON.parse(json)
         if(!Array.isArray(jsonObj)){
-            return new Token(jsonObj.id, jsonObj.name, jsonObj.image, Status.ParseJson(jsonObj.status), jsonObj.armorClass, jsonObj.healthPoints, jsonObj.initiative);
+            return new Token(jsonObj.id, jsonObj.name, jsonObj.image, Status.ParseJson(JSON.stringify(jsonObj.status)), jsonObj.armourClass, jsonObj.healthPoints, jsonObj.initiative);
         }
-        return jsonObj.map(jsonElement => Token.ParseJson(jsonElement))
+        return jsonObj.map(jsonElement => Token.ParseJson(JSON.stringify(jsonElement)))
     }
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import {useDraggable} from '@dnd-kit/core';
-import './site.css'
 
 export function Draggable(props) {
   const {attributes, listeners, setNodeRef, transform} = useDraggable({
@@ -9,7 +8,8 @@ export function Draggable(props) {
   });
 
   const style = transform ? {
-    transform: `translate3d(${transform.x}px, ${transform.y}px, 500px) scale(1.05)`,
+    transform: `translate3d(${transform.x * props.scale}px, ${transform.y * props.scale}px, 0px) scale(1.05)`,
+    transformOrigin: 'center center',
     border: `${props.token.status.color === 'None' || props.token.status === null ? '0px solid rgba(0, 0, 0, 1)' : '8px solid ' + props.token.status.color}`,
     padding: `${props.token.status.color === 'None' || props.token.status === null ? '8px 8px 8px 8px' : ''}`,
     borderRadius: `50%`,
@@ -21,7 +21,7 @@ export function Draggable(props) {
   
   return (
     <button ref={setNodeRef} style={style} className={props.className} {...listeners} {...attributes}>
-      <img src={props.token.image}/>
+      <img src={`http://localhost:3000/uploads/${props.token.image}`}/>
     </button>
   );
 }

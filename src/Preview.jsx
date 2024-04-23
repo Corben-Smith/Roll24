@@ -2,82 +2,75 @@ import React, {useRef, useState} from 'react';
 
 import './site.css'
 import Token from '../Scripts/Token';
+import Map from '../Scripts/Map'
 import Sidebar from './Sidebar';
+import Board from './Board';
 
 
 
 export default function Preview(props) {
-  const [sizeX, setSizeX] = useState(10);
-  const [sizeY, setSizeY] = useState(10);
-  const [rolledNumber, setRolled] = useState(null);
-  const [playerToken, setPlayerToken] = useState([])
+  const [map, setMap] = useState(Map.ParseJson(localStorage.getItem('savedMap')))
+  const [cellWidth, setCellWidth] = useState(100);
+  const [cellHeight, setCellHeight] = useState(100);
 
-  function handleSubmit(event){
-    event.preventDefault()
-  }
-
-  function handleChangeX(event){
-    setSizeX(event.target.value)
-  }
-  function handleChangeY(event){
-    setSizeY(event.target.value)
-  }
-
-  function Roll(number){
-    setRolled(Math.floor(Math.random() * number))
-  }
-
-  function TokenCreator(name, image, status, armourClass, healthPoints, initiative){
-    
-    try {
-      Token(name, image, status, armourClass,healthPoints,initiative);
+  const handleCellWidthChange = (event) => {
+    if(event.target.value >= 1){
+      setCellWidth(event.target.value);
     }
-    catch(e)
-    {""}
-  }
 
-  
+    setMap((prevMap) => {
+      const updatedMap = { ...prevMap };
+      updatedMap.cellDimensions = { width: cellWidth + 'px', height: map.cellDimensions[1] + 'px' };
+      return updatedMap;
+  });
+  };
+
+  const handleCellHeightChange = (event) => {
+    if(event.target.value >= 1){
+      setCellHeight(event.target.value);
+    }
+    setMap((prevMap) => {
+      const updatedMap = { ...prevMap };
+      updatedMap.cellDimensions = { width: map.cellDimensions[0] + 'px', height: cellHeight + 'px' };
+      return updatedMap;
+    });
+  };
+
   return(
-      <div>      
-        
-        <Sidebar></Sidebar>
-        
-        <form onSubmit={handleSubmit}>        
-          <label>
-            SizeX:
-            <input type="number" value={sizeX} onChange={handleChangeX}/>        
-          </label>
-          <label>
-            SizeY:
-            <input type="text" value={sizeY} onChange={handleChangeY}/>        
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-        <div className="bg-white flex flex-col text-center items-end justify-center my-8">
-          <h1>ROLLER</h1>
-          <div className="grid grid-cols-5 gap-4 justify-right object-contain text-right">
-            <button onClick={() => Roll(20)}><img className="w-10" src="icons/d20.svg" alt="Twenty Sided Dice" /></button>
-            <button onClick={() => Roll(12)}><img className="w-10" src="icons/d20.svg" alt="Twenty Sided Dice" /></button>
-            <button onClick={() => Roll(8)}><img className="w-10" src="icons/d20.svg" alt="Twenty Sided Dice" /></button>
-            <button onClick={() => Roll(6)}><img className="w-10" src="icons/d20.svg" alt="Twenty Sided Dice" /></button>
-            <button onClick={() => Roll(4)}><img className="w-10" src="icons/d20.svg" alt="Twenty Sided Dice" /></button>
-            <button onClick={() => Roll(100)}><img className="w-10" src="icons/d20.svg" alt="Twenty Sided Dice" /></button>
+      <div className='flex w-[100vw] h-[100vh] items-center'>
+        <Sidebar/>
+        <div className=' h-[90vh] w-[80vw] p-6 mx-auto bg-blue rounded-md shadow-md '>        
+          <div className='h-[45vh] overflow-scroll'>
+            <Board scale={.3} map={map}/>
           </div>
-          <h1>{rolledNumber + 1}</h1>
-        </div>
-        <div className="bg-white flex flex-col text-center items-center justify-center my-8">
-          <h1>Token Creator</h1>
-          <label>PlayerName:</label>
-          <input type = "text" id = "playerName" name = "playerName"></input>
-          <label>TokenImage:</label>
-          <input type = "file" id = "tokenImage" name = "tokenImage"></input>
-          <label>Conditions:</label>
-          <input type = "text" id = "condition" name = "condition"></input>
-          <label>Armour Class:</label>
-          <input type = "number" id = "tokenAC" name = "tokenAC" min = "0" max = "50"></input>
-          <label>Health Points:</label>
-          <input type = "number" id = "tokenHP" name = "tokenHP" min = "0" max = "2000"></input>
-          <button onClick={() => TokenCreator(playerName, tokenImage, condition, tokenAC, tokenHP)}>Submit</button>
+          <div className='grid grid-cols-3 gap-4 mt-8 text-2xl'>
+            <div>
+            <form className="max-w-sm mx-auto">
+              <label htmlFor="cell-width-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cell Width</label>
+              <input
+                type="number"
+                id="cell-width-input"
+                value={cellWidth}
+                onChange={handleCellWidthChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder=""
+              />
+            </form>
+            <form className="max-w-sm mx-auto">
+              <label htmlFor="cell-height-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cell Height</label>
+              <input
+                type="number"
+                id="cell-height-input"
+                value={cellHeight}
+                onChange={handleCellHeightChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder=""
+              />
+            </form>
+            </div>
+            <div></div>
+            <div></div>
+          </div>
         </div>
       </div>
   )
