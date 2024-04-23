@@ -28,8 +28,14 @@ export default function Board(props) {
   //   console.log(boardMap)
   // })
 
+  useEffect(() => {
+    console.log(boardMap)
+    setBoardMap(props.map)
+  }, [props.map])
+
 
   useEffect(() => {
+    console.log("chaning")
     updateTokens(boardMap.tokens);
     setCellDimensions({ width: boardMap.cellDimensions[0] + 'px', height: boardMap.cellDimensions[1] + 'px' });
 
@@ -81,7 +87,7 @@ export default function Board(props) {
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
         <div className="flex flex-wrap text-black origin-top-left" style={{ transform: `scale(${scale})`, background: `url(http://localhost:3000/uploads/${boardMap.image})`, width: dimensions.width, height: dimensions.height}} >
         {containers.map((id) => (
-          <Droppable className="flex-shrink-0 border-2 border-solid border-black-rgba" w={cellDimensions.width} h={cellDimensions.height} key={id} id={id}>
+          <Droppable className="flex-shrink-0 border-2 border-solid border-blck-rgba" w={cellDimensions.width} h={cellDimensions.height} key={id} id={id}>
             {tokens.map(token =>
               token.id === id ? <Draggable className="h-full w-full text-center text-black bg-cover bg-center" scale={1/scale} id={token.id} token={token} ></Draggable> : null  
             )} 
