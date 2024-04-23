@@ -2,22 +2,6 @@ import React from 'react';
 import './site.css'
 
 export function PhotoInput(props) {
-  /*
-  function handleImageUpload(event){
-    reader.readAsDataURL(event.target.files[0])
-
-    if(props.state !== null){     
-    const baseString = URL.createObjectURL(event.target.files[0]);
-    const img = new Image();
-
-    img.onload = () => {
-      props.state(baseString)
-    };
-    img.src = baseString
-    }
-  }
-  */
-
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();

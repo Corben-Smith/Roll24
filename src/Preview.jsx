@@ -20,7 +20,7 @@ export default function Preview(props) {
 
     setMap((prevMap) => {
       const updatedMap = { ...prevMap };
-      updatedMap.cellDimensions = [cellWidth, prevMap.cellDimensions[1]];
+      updatedMap.cellDimensions = { width: cellWidth + 'px', height: map.cellDimensions[1] + 'px' };
       return updatedMap;
   });
   };
@@ -31,7 +31,7 @@ export default function Preview(props) {
     }
     setMap((prevMap) => {
       const updatedMap = { ...prevMap };
-      updatedMap.cellDimensions = [prevMap.cellDimensions[0], cellHeight];
+      updatedMap.cellDimensions = { width: map.cellDimensions[0] + 'px', height: cellHeight + 'px' };
       return updatedMap;
     });
   };

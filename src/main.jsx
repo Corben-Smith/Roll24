@@ -13,8 +13,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
     <Routes>
-          <Route path='/' element={<App/>}/>
-          <Route path="/UI" element={<UI />} />
+          <Route path='/test' element={<App/>}/>
+          <Route path="/" element={<UI />} />
           <Route path="/Preview" element={<Preview />} />
           <Route path="/Roller" element={<Roller />} />
           <Route path="/Effects" element={<Effects />} />
