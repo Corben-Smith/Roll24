@@ -85,4 +85,4 @@ export default function Board(props) {
       </DndContext>
     </div>
   );
-};
+}

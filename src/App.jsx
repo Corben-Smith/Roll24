@@ -11,4 +11,4 @@ export default function App(props) {
       <h1>Some Kind Of Landing Page</h1>
     </div>
   )
-};
+}
