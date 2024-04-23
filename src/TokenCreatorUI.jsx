@@ -74,7 +74,7 @@ function conditionDropDown(){
               let option = document.createElement("option");
       option.setAttribute('value', statussies.results[statussy].name);
 
-      let optionText = document.createTextNode(JSON.stringify(statussies.results[statussy].name).trim);
+      let optionText = document.createTextNode(JSON.stringify(statussies.results[statussy].name).replaceAll("\"", ""));
       option.appendChild(optionText);
 
         conditionsDropDown.appendChild(option);

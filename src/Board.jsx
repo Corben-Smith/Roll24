@@ -8,7 +8,6 @@ import Map from '../Scripts/Map'
 import Token from '../Scripts/Token';
 import Status from '../Scripts/Status';
 import { PhotoInput } from './PhotoInput';
-import { KeepScale } from 'react-zoom-pan-pinch';
 
 
 export default function Board(props) {
