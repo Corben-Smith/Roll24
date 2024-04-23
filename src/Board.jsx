@@ -29,8 +29,14 @@ export default function Board(props) {
   //   console.log(boardMap)
   // })
 
+  useEffect(() => {
+    console.log(boardMap)
+    setBoardMap(props.map)
+  }, [props.map])
+
 
   useEffect(() => {
+    console.log("chaning")
     updateTokens(boardMap.tokens);
     setCellDimensions({ width: boardMap.cellDimensions[0] + 'px', height: boardMap.cellDimensions[1] + 'px' });
 
