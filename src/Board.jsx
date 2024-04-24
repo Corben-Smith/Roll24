@@ -18,11 +18,11 @@ export default function Board(props) {
   const held = useRef(null);
   const [scale, setScale] = useState(props.scale ? props.scale : 1)
 
-  const increaseScale = () => setScale(prevScale => prevScale * 1.1); // Increase scale by 10%
+  const increaseScale = () => setScale(prevScale => prevScale * 1.1);
   const decreaseScale = () => setScale(prevScale => prevScale / 1.1);
-  
+
+
   useEffect(() => {
-    console.log("chaning")
     updateTokens(boardMap.tokens);
     setCellDimensions({ width: boardMap.cellDimensions[0] + 'px', height: boardMap.cellDimensions[1] + 'px' });
 
@@ -34,6 +34,14 @@ export default function Board(props) {
     img.src = `http://localhost:3000/uploads/${boardMap.image}`;
   }, [boardMap]);
   
+  useEffect(() => {
+    const updatedMap = {
+      ...boardMap,
+      tokens: tokens // Assuming 'tokens' is the updated array you want to save
+    };
+
+    localStorage.setItem("savedMap", JSON.stringify(updatedMap))
+  }, [tokens])
 
   let containers = [];
   const parentWidth = parseInt(dimensions.width, 10); 
@@ -69,10 +77,15 @@ export default function Board(props) {
     held.current = event.active.id
   }
 
+  function reloadMap(){
+    setBoardMap(Map.ParseJson(localStorage.getItem('savedMap')))
+  }
+
+  setInterval(reloadMap, 5000);
   return (
-    <div className='bg-black'>
+    <div className='bg-black' style={{ width: dimensions.width, height: dimensions.height}}>
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-        <div className="flex flex-wrap text-black origin-top-left" style={{ transform: `scale(${scale})`, background: `url(http://localhost:3000/uploads/${boardMap.image})`, width: dimensions.width, height: dimensions.height}} >
+        <div className="flex flex-wrap text-black origin-center" style={{ transform: `scale(${scale})`, background: `url(http://localhost:3000/uploads/${boardMap.image})`, width: dimensions.width, height: dimensions.height}} >
         {containers.map((id) => (
           <Droppable className="flex-shrink-0 border-2 border-solid border-blck-rgba" w={cellDimensions.width} h={cellDimensions.height} key={id} id={id}>
             {tokens.map(token =>
@@ -83,10 +96,20 @@ export default function Board(props) {
         </div>
       </DndContext>
 
-      <div className='fixed right-4 bottom-4 bg-dark-green text-center align-middle'>
-      <button className=' text-5xl mx-8' onClick={increaseScale}>+</button> {/* Plus button */}
-      <button className=' text-5xl mx-8' onClick={decreaseScale}>-</button> {/* Minus button */}
+      <div className='fixed flex items-center justify-center w-12 h-12 rounded-full right-12 bottom-4 bg-dark-green text-white text-5xl mx-8'>
+        <button 
+          className='flex items-center justify-center w-full h-full focus:outline-none focus:ring-2 focus:ring-white'
+          onClick={increaseScale}>
+          +
+        </button> 
       </div>
-    </div>
+      <div className='fixed flex items-center justify-center w-12 h-12 rounded-full right-4 bottom-4 bg-dark-green text-white text-5xl'>
+        <button 
+          className='flex items-center justify-center w-full h-full focus:outline-none focus:ring-2 focus:ring-white'
+          onClick={decreaseScale}>
+          -
+        </button> 
+      </div>  
+      </div>
   );
 }
