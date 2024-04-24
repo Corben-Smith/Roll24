@@ -13,8 +13,8 @@ import Border from './Board.jsx';
 
 
 export default function TokenCreatorUI(props) {
-  const [name, setName] = useState("")
-  const [image, setSelectedImage] = useState(localStorage.getItem("savedToken"))
+  const [name, setName] = useState()
+  const [image, setSelectedImage] = useState()
   const [statusName, setStatusName] = useState()
   const [statusColor, setStatusColor] = useState()
   const [status, setStatus] = useState()
@@ -22,22 +22,30 @@ export default function TokenCreatorUI(props) {
   const [healthPoints, setHealthPoints] = useState(10)
   const [initiative, setInitiative] = useState(0)
   const [playerToken, setPlayerToken] = useState([])
-
+  const [id, setId] = useState(1)
+  const [tokenFile, setTokenFile] = useState("")
 
   function StatusCreator()
   {
     setStatusColor(Status.ToColor(statusName))
 
-    const status = new Status(statusName, statusColor)
+    const status = new Status(statusName, Status.ToColor(statusName))
 
     setStatus(status)
   }
 
   function TokenCreator(){
+    
+     const token = new Token(id, name, tokenFile, status, armourClass, healthPoints, initiative)
 
-     const token = new Token(name, image, status, armourClass, healthPoints, initiative)
+     //setPlayerToken(const temp = [...playerToken]; temp.push(token); return temp;)
+     setPlayerToken(
+      const temp = [...playerToken]; // Create a copy of playerToken array
+      temp.push(token); // Add the new token to the copy
+      return temp; // Return the updated array
+     )
      playerToken.push(token)
-     
+     setId(id + 1)
   }
   function handleChangeName(event){
     setName(event.target.value)
@@ -54,12 +62,28 @@ export default function TokenCreatorUI(props) {
   function handleChangeInitiative(event){
     setInitiative(event.target.value)
   }
+
+  function handleTokenImage(event){
+    event.preventDefault()
+    const file = event.target.files[0];
+    console.log(file.name)
+    setTokenFile(file.name)
+  }
+  function handleSubmit(event){
+    event.preventDefault()
+    console.log(statusName)
+    console.log(statusColor)
+    StatusCreator()
+    TokenCreator()
+    localStorage.setItem('myTokens', JSON.stringify(playerToken))
+    console.log(playerToken)
+  }
   return(
     <div className='bg-blue'> 
       <section className="flex flex-left max-w-4xl p-1 float-right">
         <form>
             <div className=" gap-1 mt-4 sm:grid-cols-2 float-right mr-6">
-              <text className=' text-white border-dashed border-2 px-2 py-0 border-white'><b>Token Creator</b></text>
+                <p className=' text-white border-dashed border-2 px-2 py-0 border-white text-center'><b>Token Creator</b></p>
                 <div>
                     <label className="text-white " value="name">Character Name</label>
                     <input id="name" type="string" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" onChange={handleChangeName}/>
@@ -89,15 +113,14 @@ export default function TokenCreatorUI(props) {
                         <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                       <div className="flex text-sm text-gray-600">
-                          <PhotoInput onChange ={setSelectedImage}/>
+                          <PhotoInput onChange ={setSelectedImage && handleTokenImage}/>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="flex flex-left">
-                <button className="px-3 py-1 leading-5 text-#000 transition-colors duration-200 bg-light-green rounded-md hover:bg-dark-green hover:text-white focus:outline-none focus:bg-gray-600 mt-2" onClick={StatusCreator && TokenCreator}>Create</button>
-                <button className="px-3 py-1 leading-5 text-#000 transition-colors duration-200 bg-light-green rounded-md hover:bg-dark-green hover:text-white focus:outline-none focus:bg-gray-600 mt-2 ml-2" onClick={localStorage.setItem('myTokens', JSON.stringify(playerToken))}>Save</button>
-            </div>
+                <button className="px-3 py-1 leading-5 text-#000 transition-colors duration-200 bg-light-green rounded-md hover:bg-dark-green hover:text-white focus:outline-none focus:bg-gray-600 mt-2 ml-2" onClick={handleSubmit}>Save</button>
+              </div>
             </div>
         </form>
       </section>

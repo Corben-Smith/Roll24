@@ -19,7 +19,7 @@ export default function Sidebar(props) {
           <div className="flex flex-col w-56 bg-black rounded-r-3xl overflow-hidden bg-light-green">
             <div className="flex items-center justify-center h-20 shadow-md bg-dark-green border-b-4 border-b-white">
               {/*<h1 className="text-3xl uppercase text-indigo-500 text-white">Logo</h1> */}
-              <img className='h-16' src="/icon96.png"/>
+              <img className='h-16' src=""/>
             </div>
             <ul className="flex flex-col py-4">
             <li>

@@ -34,22 +34,21 @@ export default function UI(props) {
   
   
   return(
-      <div className='ml-'>      
-      <section className='flex flex-left max-w-4xl p-1 float-center ml-6'>
+      <div className=''>      
+      <section className='flex flex-left max-w-4x2 p-1 float-center  mt-4'>
         <form onSubmit={handleSubmit}>        
-        <text className=' text-white border-dashed border-2 px-2 py-0 border-white'><b>Map Creator</b></text>
+        <p className=' text-white border-dashed border-2 px-2 ml-4 mt-1 py-0 border-white text-center'><b>Map Creator</b></p>
           <br/>
-          <label className="text-white">
+          <label className="text-white ml-4">
             Columns:
-            <input type="number" className='block w-full mx-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring' value={columns} onChange={handleChangeColumns}/>        
           </label>
-          <label className="text-white ">
+            <input type="number" className='block w-full mx-4 py-2 mt-2 text-#000 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring' value={columns} onChange={handleChangeColumns}/>        
+          <label className="text-white ml-4">
             Rows:
-            <input type="text" className='block w-full mx-4  py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring' value={rows} onChange={handleChangeRows}/>        
           </label>
-          
+            <input type="text" className='block w-full mx-4  py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring' value={rows} onChange={handleChangeRows}/>        
           <div>
-                    <label className="block text-sm font-medium text-white">Map Image</label>
+                 <label className="block text-sm font-medium text-white ml-4">Map Image</label>
                   <div className="mt-1 flex justify-center mx-4 px-6 pt-5 pb-6 border-2 border-white border-dashed rounded-md">
                     <div className="space-y-1 text-center">
                       <svg className="mx-auto h-12 w-12 text-white" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
@@ -63,7 +62,7 @@ export default function UI(props) {
                 </div>
                 <input type="submit" className='px-3 mr-10 py-1 leading-5 text-#000 transition-colors duration-200 bg-light-green rounded-md hover:bg-dark-green hover:text-white focus:outline-none focus:bg-gray-600 mt-2 ml-2' value="Submit" onClick={handleSubmit}/>
         </form>
-        </section>
+      </section>
       </div>
   )
 }
