@@ -25,7 +25,8 @@ export default function UI(props) {
 
   
   return(
-      <div className='flex float-left'>      
+      <div>      
+      <section>
         <form onSubmit={handleSubmit}>        
         <label>Upload Map Image:</label>
         <PhotoInput value = {image} onChange = {setSelectedImage}/>
@@ -39,6 +40,7 @@ export default function UI(props) {
           </label>
           <input type="submit" value="Submit" />
         </form>
+        </section>
       </div>
   )
 }
