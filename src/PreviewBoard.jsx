@@ -11,7 +11,7 @@ import { PhotoInput } from './PhotoInput';
 import { KeepScale } from 'react-zoom-pan-pinch';
 
 
-export default function Board(props) {
+export default function PreviewBoard(props) {
   const [boardMap, setBoardMap] = useState(props.map !== null ? props.map : Map.ParseJson(localStorage.getItem('savedMap')));
   const [tokens, updateTokens] = useState([]);
   const [dimensions, setDimensions] = useState({ width: 'auto', height: 'auto' });
@@ -21,13 +21,6 @@ export default function Board(props) {
 
   const increaseScale = () => setScale(prevScale => prevScale * 1.1); // Increase scale by 10%
   const decreaseScale = () => setScale(prevScale => prevScale / 1.1);
-
-  useEffect(() => {
-    const map = new Map('map.jpg', [new Token(1, "Corben", 'image.png', new Status("Bloodied", "#FF0000"), 10, 10, 10)], [133.78378378378378, 133.78378378378378]);
-    localStorage.setItem('savedMap', JSON.stringify(map))
-    
-    console.log(boardMap)
-  })
 
   useEffect(() => {
     console.log(boardMap)
@@ -97,10 +90,20 @@ export default function Board(props) {
         </div>
       </DndContext>
 
-      <div className='fixed right-4 bottom-4 bg-dark-green text-center align-middle'>
-      <button className=' text-5xl mx-8' onClick={increaseScale}>+</button> {/* Plus button */}
-      <button className=' text-5xl mx-8' onClick={decreaseScale}>-</button> {/* Minus button */}
+      <div className='fixed flex items-center justify-center w-12 h-12 rounded-full right-12 bottom-4 bg-dark-green text-white text-5xl mx-8'>
+        <button 
+          className='flex items-center justify-center w-full h-full focus:outline-none focus:ring-2 focus:ring-white'
+          onClick={increaseScale}>
+          +
+        </button> 
       </div>
+      <div className='fixed flex items-center justify-center w-12 h-12 rounded-full right-4 bottom-4 bg-dark-green text-white text-5xl'>
+        <button 
+          className='flex items-center justify-center w-full h-full focus:outline-none focus:ring-2 focus:ring-white'
+          onClick={decreaseScale}>
+          -
+        </button> 
+      </div>  
     </div>
   );
 }

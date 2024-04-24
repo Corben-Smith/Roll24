@@ -4,8 +4,8 @@ import './site.css'
 import Token from '../Scripts/Token';
 import Map from '../Scripts/Map'
 import Sidebar from './Sidebar';
-import Board from './Board';
-
+import PreviewBoard from './PreviewBoard'
+import { Draggable } from './Draggable';
 
 
 export default function Preview(props) {
@@ -26,6 +26,7 @@ export default function Preview(props) {
   };
 
   const handleCellTest = (event) => {
+    setMap(Map.ParseJson(localStorage.getItem("savedMap")))
     if(cellHeight > 50 && cellWidth > 50){    
       setMap((map) => {
       const updatedMap = { ...map };
@@ -36,40 +37,61 @@ export default function Preview(props) {
     }
   }
 
+  function updateMap(){
+    setMap(Map.ParseJson(localStorage.getItem("savedMap")))
+    setMap((map) => {
+      const updatedMap = { ...map };
+      updatedMap.cellDimensions = [cellWidth, cellHeight];
+      return updatedMap;})
+
+    const updatedMap = {
+      ...map,
+      cellDimensions: [cellWidth, cellHeight] // Assuming 'tokens' is the updated array you want to save
+    };
+    localStorage.setItem("savedMap", JSON.stringify(updatedMap))
+  }
+
   return(
       <div className='flex w-[100vw] h-[100vh] items-center'>
         <Sidebar/>
-        <div className=' h-[90vh] w-[80vw] p-6 mx-auto bg-blue rounded-md shadow-md '>        
+        <div className='h-[90vh] w-[80vw] p-6 mx-auto bg-blue rounded-md shadow-md '>        
           <div className='h-[45vh] overflow-scroll'>
-            <Board scale={.3} map={map}/>
+            <PreviewBoard scale={.3} map={map}/>
           </div>
           <div className='grid grid-cols-3 gap-4 mt-8 text-2xl'>
             <div className='flex items-center flex-col w-full h-full'>
-            <form className="max-w-sm mx-auto w-full">
-              <label htmlFor="cell-width-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cell Width</label>
-              <input
-                type="number"
-                id="cell-width-input"
-                value={cellWidth}
-                onChange={handleCellWidthChange}
-                className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500`}
-                placeholder=""
-              />
-            </form>
-            <form className="max-w-sm mx-auto w-full">
-              <label htmlFor="cell-height-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cell Height</label>
-              <input
-                type="number"
-                id="cell-height-input"
-                value={cellHeight}
-                onChange={handleCellHeightChange}
-                className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500`}
-                placeholder=""
-              />
-            </form>
-            <button onClick={handleCellTest} className='bg-white rounded-xl shadow-lg w-auto mt-5 px-8 border-solid border border-black' >Test Changes</button>
+              <form className="max-w-sm mx-auto w-full">
+                <label htmlFor="cell-width-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cell Width</label>
+                <input
+                  type="number"
+                  id="cell-width-input"
+                  value={cellWidth}
+                  onChange={handleCellWidthChange}
+                  className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500`}
+                  placeholder=""
+                />
+              </form>
+              <form className="max-w-sm mx-auto w-full">
+                <label htmlFor="cell-height-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cell Height</label>
+                <input
+                  type="number"
+                  id="cell-height-input"
+                  value={cellHeight}
+                  onChange={handleCellHeightChange}
+                  className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500`}
+                  placeholder=""
+                />
+              </form>
+              <button onClick={handleCellTest} className='bg-white rounded-xl shadow-lg w-auto mt-5 px-8 border-solid border border-black' >Test Changes</button>
+              <button onClick={updateMap} className='bg-white rounded-xl shadow-lg w-auto mt-5 px-8 border-solid border border-black' > Submit Changes</button>
             </div>
-            <div></div>
+            <div className='grid grid-cols-3 bg-dark-green overflow-scroll'>
+              {map.tokens.map((token) => (
+              <div  key={token.id}  className='m-4'>
+                <img className='object-contain' src={`http://localhost:3000/uploads/${token.image}`}/>
+              </div>
+              ))}
+            </div>
             <div></div>
           </div>
         </div>
