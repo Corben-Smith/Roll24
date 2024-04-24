@@ -79,7 +79,7 @@ export default function PreviewBoard(props) {
   return (
     <div className='bg-black'>
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-        <div className="flex flex-wrap text-black origin-left" style={{ transform: `scale(${scale})`, background: `url(http://localhost:3000/uploads/${boardMap.image})`, width: dimensions.width, height: dimensions.height}} >
+        <div className="flex flex-wrap text-black origin-top-left" style={{ transform: `scale(${scale})`, background: `url(http://localhost:3000/uploads/${boardMap.image})`, width: dimensions.width, height: dimensions.height}} >
         {containers.map((id) => (
           <Droppable className="flex-shrink-0 border-2 border-solid border-blck-rgba" w={cellDimensions.width} h={cellDimensions.height} key={id} id={id}>
             {tokens.map(token =>

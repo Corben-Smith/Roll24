@@ -40,7 +40,7 @@ return(
             <button onClick={() => Roll(4)} className='border-b-2 border-white'><img className="w-10 ml-2" src="src\assets\diceImages\D4.png" alt="Four Sided Dice" /></button>
             <button onClick={() => Roll(100)}><img className="w-12 mx-1" src="src\assets\diceImages\D100.png" alt="Hundred Sided Dice" /></button>
           </div>
-          <h1 className=' mr-6 ml-13 text-white'>{rolledNumber + 1}</h1>
+          <h1 className=' mr-6 ml-13 text-white text-2xl'>{rolledNumber + 1}</h1>
         </div>
       </div>
   )

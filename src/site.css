@@ -789,17 +789,16 @@ video {
   margin-bottom: 2rem;
 }
 
-.mx-3 {
-  margin-left: 0.75rem;
-  margin-right: 0.75rem;
-}
-
 .mb-2 {
   margin-bottom: 0.5rem;
 }
 
 .ml-2 {
   margin-left: 0.5rem;
+}
+
+.ml-4 {
+  margin-left: 1rem;
 }
 
 .ml-6 {
@@ -836,10 +835,6 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.ml-4 {
-  margin-left: 1rem;
 }
 
 .box-border {
@@ -1081,8 +1076,8 @@ video {
   transform-origin: center;
 }
 
-.origin-left {
-  transform-origin: left;
+.origin-top-left {
+  transform-origin: top left;
 }
 
 .\!transform {

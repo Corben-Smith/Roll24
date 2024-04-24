@@ -36,16 +36,16 @@ export default function TokenCreatorUI(props) {
 
   function TokenCreator(){
     
-     const token = new Token(id, name, tokenFile, status, armourClass, healthPoints, initiative)
+    //  const token = new Token(id, name, tokenFile, status, armourClass, healthPoints, initiative)
 
-     //setPlayerToken(const temp = [...playerToken]; temp.push(token); return temp;)
-     setPlayerToken(
-      //const temp = [...playerToken]; // Create a copy of playerToken array
-      //temp.push(token); // Add the new token to the copy
-      //return temp; // Return the updated array
-     )
-     playerToken.push(token)
-     setId(id + 1)
+    //  //setPlayerToken(const temp = [...playerToken]; temp.push(token); return temp;)
+    //  setPlayerToken(
+    //   const temp = [...playerToken]; // Create a copy of playerToken array
+    //   temp.push(token); // Add the new token to the copy
+    //   return temp; // Return the updated array
+    //  )
+    //  playerToken.push(token)
+    //  setId(id + 1)
   }
   function handleChangeName(event){
     setName(event.target.value)

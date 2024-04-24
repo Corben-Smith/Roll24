@@ -81,7 +81,7 @@ export default function Board(props) {
     setBoardMap(Map.ParseJson(localStorage.getItem('savedMap')))
   }
 
-  setInterval(reloadMap, 5000);
+  setInterval(reloadMap, 30000);
   return (
     <div className='bg-black' style={{ width: dimensions.width, height: dimensions.height}}>
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
