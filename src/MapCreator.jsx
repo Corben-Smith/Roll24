@@ -1,40 +1,41 @@
 import React, {useRef, useState} from 'react';
 
 import './site.css'
+import { PhotoInput } from './PhotoInput';
 
 
 
 
 export default function UI(props) {
-  const [sizeX, setSizeX] = useState(10);
-  const [sizeY, setSizeY] = useState(10);
-  const [rolledNumber, setRolled] = useState(null);
-  const [playerToken, setPlayerToken] = useState([])
+  const [columns, setColumns] = useState(10);
+  const [rows, setRows] = useState(10);
+  const [image, setSelectedImage] = useState(localStorage.getItem("savedImage"))
 
   function handleSubmit(event){
     event.preventDefault()
   }
 
-  function handleChangeX(event){
-    setSizeX(event.target.value)
+  function handleChangeColumns(event){
+    setColumns(event.target.value)
   }
-  function handleChangeY(event){
-    setSizeY(event.target.value)
+  function handleChangeRows(event){
+    setRows(event.target.value)
   }
 
 
   
   return(
-      <div>      
-        
+      <div className='flex float-left'>      
         <form onSubmit={handleSubmit}>        
+        <label>Upload Map Image:</label>
+        <PhotoInput value = {image} onChange = {setSelectedImage}/>
           <label>
-            SizeX:
-            <input type="number" value={sizeX} onChange={handleChangeX}/>        
+            Columns:
+            <input type="number" value={columns} onChange={handleChangeColumns}/>        
           </label>
           <label>
-            SizeY:
-            <input type="text" value={sizeY} onChange={handleChangeY}/>        
+            Rows:
+            <input type="text" value={rows} onChange={handleChangeRows}/>        
           </label>
           <input type="submit" value="Submit" />
         </form>
