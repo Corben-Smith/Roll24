@@ -40,9 +40,9 @@ export default function TokenCreatorUI(props) {
 
      //setPlayerToken(const temp = [...playerToken]; temp.push(token); return temp;)
      setPlayerToken(
-      const temp = [...playerToken]; // Create a copy of playerToken array
-      temp.push(token); // Add the new token to the copy
-      return temp; // Return the updated array
+      //const temp = [...playerToken]; // Create a copy of playerToken array
+      //temp.push(token); // Add the new token to the copy
+      //return temp; // Return the updated array
      )
      playerToken.push(token)
      setId(id + 1)

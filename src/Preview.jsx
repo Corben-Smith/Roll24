@@ -74,7 +74,7 @@ export default function Preview(props) {
   
 
   return(
-      <div className='flex w-[100vw] h-[100vh] items-center'>
+      <div className='flex w-[100vw] h-[100vh] items-center bg-blue'>
         <Sidebar/>
         <div className='h-[90vh] w-[80vw] p-6 mx-auto bg-blue rounded-md shadow-md '>        
           <div className='h-[45vh] overflow-scroll'>
