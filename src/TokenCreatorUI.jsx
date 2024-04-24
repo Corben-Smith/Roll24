@@ -7,7 +7,7 @@ import Token from '../Scripts/Token';
 import Status from '../Scripts/Status';
 import { PhotoInput } from './PhotoInput';
 import { renderIntoDocument } from 'react-dom/test-utils';
-
+import ConditionSelect from './ConditionSelect';
 
 
 
@@ -21,9 +21,6 @@ export default function TokenCreatorUI(props) {
   const [healthPoints, setHealthPoints] = useState(10)
   const [initiative, setInitiative] = useState(0)
   const [playerToken, setPlayerToken] = useState([])
-  const conditionsDropDown = document.getElementById("conditionsDropDown")
-  
-
   function StatusCreator()
   {
     setStatusColor(Status.method(statusName))
@@ -53,40 +50,6 @@ export default function TokenCreatorUI(props) {
   function handleChangeInitiative(event){
     setInitiative(event.target.value)
   }
-  
-    useEffect(()=>{  const myHeaders = new Headers();
-      myHeaders.append("Accept", "application/json");
-
-      const requestOptions = {
-          method: "GET",
-          headers: myHeaders,
-          redirect: "follow"
-      };
-
-      let statussies;
-
-           fetch("https://www.dnd5eapi.co/api/conditions", requestOptions)
-          .then((response) => response.json())
-          .then((result) => {
-              statussies = result
-
-              for(let statussy in statussies.results){
-
-                  let option = document.createElement("option");
-          option.setAttribute('value', statussies.results[statussy].name);
-
-          let optionText = document.createTextNode(JSON.stringify(statussies.results[statussy].name).replaceAll("\"", ""));
-          option.appendChild(optionText);
-
-            conditionsDropDown.appendChild(option);
-              }
-
-    }
-          )
-          .catch((error) => console.error(error));
-          renderIntoDocument.apply(conditionsDropDown, arguments);
-        })
-
   return(
     <div className='bg-blue'> 
       <section className="flex flex-left max-w-4xl p-1 float-right">
@@ -112,12 +75,7 @@ export default function TokenCreatorUI(props) {
                     <input id="initiative" type="number" min='-5' max='60' className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" onChange={handleChangeInitiative}/>
                 </div>
                 <div>
-                    
-                    
-                    <label className="text-white dark:text-gray-200" value="Status">Status</label>
-                    <select className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" id='conditionsDropDown' onSelect={handleChangeStatusName}>
-                    <option value= "">None</option>
-                    </select>
+                  <ConditionSelect  onSelect={handleChangeStatusName}/>
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-white">Image</label>
@@ -136,8 +94,6 @@ export default function TokenCreatorUI(props) {
                 <button className="px-3 py-1 leading-5 text-#000 transition-colors duration-200 bg-light-green rounded-md hover:bg-dark-green hover:text-white focus:outline-none focus:bg-gray-600 mt-2" onClick={StatusCreator && TokenCreator}>Save</button>
             </div>
             </div>
-
-            
         </form>
       </section>
     </div>
