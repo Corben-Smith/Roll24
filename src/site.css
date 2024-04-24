@@ -2036,13 +2036,13 @@ video {
   border-style: none;
 }
 
+.border-blck-rgba {
+  border-color: rgba(0, 0, 0, 0.10);
+}
+
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
-}
-
-.border-blck-rgba {
-  border-color: rgba(0, 0, 0, 0.10);
 }
 
 .border-b-white {

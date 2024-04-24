@@ -11,7 +11,7 @@ import { PhotoInput } from './PhotoInput';
 
 
 export default function Board(props) {
-  const [boardMap, setBoardMap] = useState(props.map ? props.map : Map.ParseJson(localStorage.getItem('savedMap')));
+  const [boardMap, setBoardMap] = useState(Map.ParseJson(localStorage.getItem('savedMap')));
   const [tokens, updateTokens] = useState([]);
   const [dimensions, setDimensions] = useState({ width: 'auto', height: 'auto' });
   const [cellDimensions, setCellDimensions] = useState({ width: '100px', height: '100px' });
@@ -20,20 +20,7 @@ export default function Board(props) {
 
   const increaseScale = () => setScale(prevScale => prevScale * 1.1); // Increase scale by 10%
   const decreaseScale = () => setScale(prevScale => prevScale / 1.1);
-
-  // useEffect(() => {
-  //   // const map = new Map('map.jpg', [new Token(1, "Corben", 'image.png', new Status("Bloodied", "#FF0000"), 10, 10, 10)], [133.78378378378378, 133.78378378378378]);
-  //   // localStorage.setItem('savedMap', JSON.stringify(map))
-    
-  //   console.log(boardMap)
-  // })
-
-  useEffect(() => {
-    console.log(boardMap)
-    setBoardMap(props.map)
-  }, [props.map])
-
-
+  
   useEffect(() => {
     console.log("chaning")
     updateTokens(boardMap.tokens);
