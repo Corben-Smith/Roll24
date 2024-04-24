@@ -78,7 +78,7 @@ export default function Preview(props) {
         <Sidebar/>
         <div className='h-[90vh] w-[80vw] p-6 mx-auto bg-blue rounded-md shadow-md '>        
           <div className='h-[45vh] overflow-scroll'>
-            <PreviewBoard scale={.3} map={map}/>
+            <PreviewBoard scale={.5} map={map}/>
           </div>
           <div className='grid grid-cols-3 gap-4 mt-8 text-2xl'>
             <div className='flex items-center flex-col w-full h-full'>
@@ -107,15 +107,18 @@ export default function Preview(props) {
               <button onClick={handleCellTest} className='bg-white rounded-xl shadow-lg w-auto mt-5 px-8 border-solid border border-black' >Test Changes</button>
               <button onClick={updateMap} className='bg-white rounded-xl shadow-lg w-auto mt-5 px-8 border-solid border border-black' >Submit Changes</button>
             </div>
-            <div className='grid grid-cols-3 bg-dark-green overflow-scroll'>
-              {map.tokens.map((token) => (
-              <div  key={token.id}  className='m-4'>
-                <img className='object-contain' src={`http://localhost:3000/uploads/${token.image}`}/>
-                <ConditionSelect onChange={(event) => handleConditionSelect(token, event)}/>
+            <div className='border border-solid border-dark-green col-span-2 h-[35vh] overflow-x-auto'>
+              <div className='grid grid-cols-3 w-full text-center text-bold'>
+                {map.tokens.map((token) => (
+                  <div key={token.id} className='flex flex-col items-center p-4 object-contain'>
+                    <h1 className='text-white'>{token.name}</h1>
+                    <img className='h-[20vh]' src={`http://localhost:3000/uploads/${token.image}`} />
+                    <ConditionSelect onChange={(event) => handleConditionSelect(token, event)} />
+                  </div>
+                ))}
               </div>
-              ))}
             </div>
-            <div></div>
+
           </div>
         </div>
       </div>
