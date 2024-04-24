@@ -6,6 +6,8 @@ import Map from '../Scripts/Map'
 import Sidebar from './Sidebar';
 import PreviewBoard from './PreviewBoard'
 import { Draggable } from './Draggable';
+import ConditionSelect from './ConditionSelect';
+import Status from '../Scripts/Status';
 
 
 export default function Preview(props) {
@@ -51,6 +53,26 @@ export default function Preview(props) {
     localStorage.setItem("savedMap", JSON.stringify(updatedMap))
   }
 
+  function handleConditionSelect(tokenIn, event){
+    console.log("as")
+    const updatedTokens = map.tokens.map(token =>
+      token.id === tokenIn.id ? { ...token, status: new Status(event.target.value, Status.ToColor(event.target.value)) } : token
+    )
+
+    setMap(Map.ParseJson(localStorage.getItem("savedMap")))
+    setMap((map) => {
+      const updatedMap = { ...map };
+      updatedMap.tokens = updatedTokens;
+      return updatedMap;})
+
+    const updatedMap = {
+      ...map,
+      tokens: updatedTokens
+    };
+    localStorage.setItem("savedMap", JSON.stringify(updatedMap))
+  }
+  
+
   return(
       <div className='flex w-[100vw] h-[100vh] items-center'>
         <Sidebar/>
@@ -83,12 +105,13 @@ export default function Preview(props) {
                 />
               </form>
               <button onClick={handleCellTest} className='bg-white rounded-xl shadow-lg w-auto mt-5 px-8 border-solid border border-black' >Test Changes</button>
-              <button onClick={updateMap} className='bg-white rounded-xl shadow-lg w-auto mt-5 px-8 border-solid border border-black' > Submit Changes</button>
+              <button onClick={updateMap} className='bg-white rounded-xl shadow-lg w-auto mt-5 px-8 border-solid border border-black' >Submit Changes</button>
             </div>
             <div className='grid grid-cols-3 bg-dark-green overflow-scroll'>
               {map.tokens.map((token) => (
               <div  key={token.id}  className='m-4'>
                 <img className='object-contain' src={`http://localhost:3000/uploads/${token.image}`}/>
+                <ConditionSelect onChange={(event) => handleConditionSelect(token, event)}/>
               </div>
               ))}
             </div>

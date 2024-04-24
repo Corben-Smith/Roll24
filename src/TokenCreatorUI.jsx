@@ -21,6 +21,8 @@ export default function TokenCreatorUI(props) {
   const [healthPoints, setHealthPoints] = useState(10)
   const [initiative, setInitiative] = useState(0)
   const [playerToken, setPlayerToken] = useState([])
+
+  
   function StatusCreator()
   {
     setStatusColor(Status.method(statusName))
