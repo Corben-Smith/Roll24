@@ -5,7 +5,6 @@ import Token from '../Scripts/Token';
 import Map from '../Scripts/Map'
 import Sidebar from './Sidebar';
 import PreviewBoard from './PreviewBoard'
-import { Draggable } from './Draggable';
 import ConditionSelect from './ConditionSelect';
 import Status from '../Scripts/Status';
 
