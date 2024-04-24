@@ -22,10 +22,10 @@ export default function TokenCreatorUI(props) {
   const [initiative, setInitiative] = useState(0)
   const [playerToken, setPlayerToken] = useState([])
 
-  
+
   function StatusCreator()
   {
-    setStatusColor(Status.method(statusName))
+    setStatusColor(Status.ToColor(statusName))
 
     const status = new Status(statusName, statusColor)
 
@@ -77,7 +77,7 @@ export default function TokenCreatorUI(props) {
                     <input id="initiative" type="number" min='-5' max='60' className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" onChange={handleChangeInitiative}/>
                 </div>
                 <div>
-                  <ConditionSelect  onSelect={handleChangeStatusName}/>
+                  <ConditionSelect  onChange={handleChangeStatusName}/>
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-white">Image</label>
