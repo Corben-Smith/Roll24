@@ -35,7 +35,6 @@ export default function TokenCreatorUI(props) {
   }
 
   function TokenCreator(){
-    
     //  const token = new Token(id, name, tokenFile, status, armourClass, healthPoints, initiative)
 
     //  //setPlayerToken(const temp = [...playerToken]; temp.push(token); return temp;)
